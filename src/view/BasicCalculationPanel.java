@@ -14,24 +14,28 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-public class BasicCalculationPanel extends JPanel {
+public class BasicCalculationPanel extends JPanel implements Resetable {
 
 	private JLabel mainLabel;
 	private JLabel operatorLabel;
 	private JLabel resultLabel;
+	
 	private JTextField firstInput;
 	private JTextField secondInput;
+	
 	private JPanel radioButtonsPanel;
 	private JPanel expressionPanel;
+	
 	private ButtonGroup group;
+	
 	private JRadioButton sumButton;
 	private JRadioButton differenceButton;
 	private JRadioButton productButton;
 	private JRadioButton quotientButton;
+	
 	private JButton calculateButton;
 
 	public BasicCalculationPanel() {
-
 		setupPanel();
 	}
 	
@@ -90,7 +94,7 @@ public class BasicCalculationPanel extends JPanel {
 		mainLabel = new JLabel("Basic Calculations");
 		mainLabel.setFont(new Font(mainLabel.getFont().getFontName(), mainLabel.getFont().getStyle(), 20));
 		
-		operatorLabel = new JLabel("+");
+		operatorLabel = new JLabel("_");
 		resultLabel = new JLabel("= _");
 		calculateButton = new JButton("Calculate");
 		firstInput = new JTextField();
@@ -140,6 +144,14 @@ public class BasicCalculationPanel extends JPanel {
 		this.add(radioButtonsPanel);
 		this.add(expressionPanel);
 		this.add(Box.createGlue());
-		
+	}
+
+	@Override
+	public void reset() {
+		group.clearSelection();
+		operatorLabel.setText("_");
+		resultLabel.setText("= _");
+		firstInput.setText("");
+		secondInput.setText("");
 	}
 }

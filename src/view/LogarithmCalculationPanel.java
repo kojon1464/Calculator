@@ -14,11 +14,12 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-public class LogarithmCalculationPanel extends JPanel {
+public class LogarithmCalculationPanel extends JPanel implements Resetable {
 
 	private JLabel mainLabel;
 	private JLabel logarithmLabel;
 	private JLabel resultLabel;
+	
 	private JTextField firstInput;
 
 	private JPanel expressionPanel;
@@ -26,7 +27,6 @@ public class LogarithmCalculationPanel extends JPanel {
 	private JButton calculateButton;
 
 	public LogarithmCalculationPanel() {
-
 		setupPanel();
 	}
 	
@@ -80,6 +80,11 @@ public class LogarithmCalculationPanel extends JPanel {
 		this.add(Box.createGlue());
 		this.add(expressionPanel);
 		this.add(Box.createGlue());
-		
+	}
+
+	@Override
+	public void reset() {
+		firstInput.setText("");
+		resultLabel.setText("= _");
 	}
 }

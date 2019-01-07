@@ -14,18 +14,20 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-public class PowerCalculationPanel extends JPanel {
+public class PowerCalculationPanel extends JPanel implements Resetable {
 
 	private JLabel mainLabel;
 	private JLabel powerLabel;
 	private JLabel resultLabel;
+	
 	private JTextField firstInput;
 	private JTextField secondInput;
+	
 	private JPanel expressionPanel;
+	
 	private JButton calculateButton;
 
 	public PowerCalculationPanel() {
-
 		setupPanel();
 	}
 	
@@ -86,6 +88,12 @@ public class PowerCalculationPanel extends JPanel {
 		this.add(Box.createGlue());
 		this.add(expressionPanel);
 		this.add(Box.createGlue());
-		
+	}
+
+	@Override
+	public void reset() {
+		firstInput.setText("");
+		secondInput.setText("");
+		resultLabel.setText("= _");
 	}
 }

@@ -15,7 +15,9 @@ import javax.swing.plaf.basic.BasicTextUI.BasicCaret;
 public class CalculatorFrame extends JFrame {
 
 	private JMenuBar menuBar;
+	
 	private JMenu menu;
+	
 	private JMenuItem basicCalculation;
 	private JMenuItem trigonometryCalculation;
 	private JMenuItem powerCalculation;

@@ -6,13 +6,13 @@ import java.util.List;
 public class Model {
 
 	public enum Operator {
-		SUM, DIFFERENCE, PRODUCT, QUOCIENT, TANGENT, COTANGENT, SINE, COSINE
+		SUM, DIFFERENCE, PRODUCT, QUOCIENT, TANGENT, COTANGENT, SINE, COSINE, NONE
 	}
-	
 
 	private Operator operator;
 	private Double result;
-	private String equationResult;
+	private Double secondresult; //used for quadratic equation;
+	private String errorMessage;
 
 	public void setOperator(Operator operator) {
 		this.operator = operator;
@@ -26,13 +26,17 @@ public class Model {
 		return result.toString();
 	}
 	
-	public String getEquationResult() {
-		return equationResult;
+	public String getSecondResult() {
+		return secondresult.toString();
+	}
+	
+	public String getErrorMessage() {
+		return errorMessage.toString();
 	}
 
 	public boolean basicCalcualtion(double first, double second) {
-		boolean divisionByZero = false;
-		
+		boolean error = false;
+
 		switch (operator) {
 		case SUM:
 			result = first + second;
@@ -44,21 +48,28 @@ public class Model {
 			result = first * second;
 			break;
 		case QUOCIENT:
-			if(second == 0)
-				divisionByZero = true;
+			if (second == 0) {
+				error = true;
+				errorMessage = "Can not divide by zero!";
+			}
 			result = first / second;
 			break;
+		default:
+			error = true;
+			errorMessage = "Please select operation!";
 		}
-		return divisionByZero;
+		return error;
 	}
-	
-	public void trygonometryCalculation(double first) {
+
+	public boolean trygonometryCalculation(double first) {
+		boolean error = false;
+
 		switch (operator) {
 		case TANGENT:
 			result = Math.tan(first);
 			break;
 		case COTANGENT:
-			result = 1d/Math.tan(first);
+			result = 1d / Math.tan(first);
 			break;
 		case SINE:
 			result = Math.sin(first);
@@ -66,37 +77,41 @@ public class Model {
 		case COSINE:
 			result = Math.cos(first);
 			break;
+		default:
+			error = true;
+			errorMessage = "Please select operation!";
 		}
+		return error;
 	}
-	
+
 	public void logarithmCalculation(double first) {
 		result = Math.log(first);
 	}
-	
+
 	public void powerCalculation(double first, double second) {
 		result = Math.pow(first, second);
 	}
-	
-	public void quadraticEquationCalculation(double first, double second, double third) {
-		if(Math.pow(second, 2) -4*first*third < 0) {
-			equationResult = "no results";
-		}else {
-			equationResult ="x = ";
-			Double temp = ( -second + Math.sqrt(Math.pow(second, 2) - (4*first*third)))/(2*first);
-			equationResult += temp.toString() + " and x = ";
-			temp = (-second - Math.sqrt(Math.pow(second, 2) - (4*first*third)))/(2*first);
-			equationResult += temp.toString();
+
+	//returning true when equation don't have results;
+	public boolean quadraticEquationCalculation(double first, double second, double third) {
+		
+		if (Math.pow(second, 2) - 4 * first * third < 0) {
+			return true;
+		} else {
+			result = (-second + Math.sqrt(Math.pow(second, 2) - (4 * first * third))) / (2 * first);
+			secondresult = (-second - Math.sqrt(Math.pow(second, 2) - (4 * first * third))) / (2 * first);
 		}
+		return false;
 	}
-	
+
 	public boolean validateDouble(String text) {
 		boolean canBeValidated = false;
-		
-		try{
+
+		try {
 			Double.parseDouble(text);
 			canBeValidated = true;
-		}	catch (Exception e) {
-			//handle error;
+		} catch (Exception e) {
+			// handle error;
 		}
 		return canBeValidated;
 	}

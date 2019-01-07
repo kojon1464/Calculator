@@ -14,23 +14,27 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-public class TrygonometryCalculationPanel extends JPanel {
+public class TrygonometryCalculationPanel extends JPanel implements Resetable {
 
 	private JLabel mainLabel;
 	private JLabel operatorLabel;
 	private JLabel resultLabel;
+	
 	private JTextField firstInput;
+	
 	private JPanel radioButtonsPanel;
 	private JPanel expressionPanel;
+	
 	private ButtonGroup group;
+	
 	private JRadioButton tanButton;
 	private JRadioButton ctanButton;
 	private JRadioButton sinButton;
 	private JRadioButton cosButton;
+	
 	private JButton calculateButton;
 
 	public TrygonometryCalculationPanel() {
-
 		setupPanel();
 	}
 	
@@ -133,5 +137,13 @@ public class TrygonometryCalculationPanel extends JPanel {
 		this.add(expressionPanel);
 		this.add(Box.createGlue());
 		
+	}
+
+	@Override
+	public void reset() {
+		group.clearSelection();
+		operatorLabel.setText("_");
+		resultLabel.setText("= _");
+		firstInput.setText("");
 	}
 }

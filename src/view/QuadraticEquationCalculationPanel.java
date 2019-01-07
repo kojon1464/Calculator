@@ -12,20 +12,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class QuadraticEquationCalculationPanel extends JPanel {
+public class QuadraticEquationCalculationPanel extends JPanel implements Resetable {
 
 	private JLabel mainLabel;
 	private JLabel firstLabel;
 	private JLabel secondLabel;
 	private JLabel resultLabel;
+	
 	private JTextField firstInput;
 	private JTextField secondInput;
 	private JTextField thirdInput;
+	
 	private JPanel expressionPanel;
+	
 	private JButton calculateButton;
 
 	public QuadraticEquationCalculationPanel() {
-
 		setupPanel();
 	}
 	
@@ -95,6 +97,13 @@ public class QuadraticEquationCalculationPanel extends JPanel {
 		this.add(expressionPanel);
 		this.add(resultLabel);
 		this.add(Box.createGlue());
-		
+	}
+
+	@Override
+	public void reset() {
+		firstInput.setText("");
+		secondInput.setText("");
+		thirdInput.setText("");
+		resultLabel.setText("x = _, x = _");
 	}
 }
